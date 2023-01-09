@@ -1,6 +1,6 @@
 # CPSC1517 Winter 2023 Term Workbook
 
-## your name here
+## Napat Phuwarintarawanich
 
 ## your Github Account id
 
