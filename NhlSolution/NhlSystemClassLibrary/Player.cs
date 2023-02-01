@@ -75,7 +75,7 @@ namespace NhlSystemClassLibrary
             //allow acess to inheritance class - protected 
             protected set
             {
-                if(Utilities.IsPositiveOrZero(value))
+                if(!Utilities.IsPositiveOrZero(value))
                 {
                     throw new ArgumentException(nameof(GamePlayed), "Game Played cannot be lower than 0.");
                 }
@@ -91,7 +91,7 @@ namespace NhlSystemClassLibrary
             }
             private set
             {
-                if (Utilities.IsPositiveOrZero(value))
+                if (!Utilities.IsPositiveOrZero(value))
                 {
                     throw new ArgumentException(nameof(Goals), "Goals cannot be lower than 0.");
                 }
@@ -107,7 +107,7 @@ namespace NhlSystemClassLibrary
             }
             private set
             {
-                if (Utilities.IsPositiveOrZero(value))
+                if (!Utilities.IsPositiveOrZero(value))
                 {
                     throw new ArgumentException(nameof(Assists), "Assists cannot be lower than 0.");
                 }
@@ -143,6 +143,55 @@ namespace NhlSystemClassLibrary
             PlayerNo = playerNo;
             Name = name;
             Position = position;
+        }
+
+        public static Player Parse(string csvLine)
+        {
+            const char Delimiter = ',';
+            /**the order of the column value are 
+             0) PlayerNo
+             1) Name
+             2) Position
+             3) GamedPlayed
+             4) Goals
+             5) Assists
+            */
+            const int ExpectedColumnCount = 6;
+            string[] tokens = csvLine.Split(Delimiter);
+            //verify that the length of the array
+            if(tokens.Length != ExpectedColumnCount)
+            {
+                throw new FormatException($"csv line must contain exactly {ExpectedColumnCount} values.");
+            }
+            int playerNo = int.Parse(tokens[0]);
+            string name = tokens[1];
+            Position position = Enum.Parse<Position>(tokens[2]);
+            //Position position = (Position)Enum.Parse(typeof(Position), tokens[2]);
+            int gamePlayed = int.Parse(tokens[3]);
+            int goals = int.Parse(tokens[4]);
+            int assists = int.Parse(tokens[5]);
+            return new Player(playerNo, name, position, gamePlayed, goals, assists);
+        }
+
+        public static bool TryParse(string csvLine, out Player currentPlayer)
+        {
+            bool success = false;
+
+            try
+            {
+                currentPlayer = Parse(csvLine);
+                success = true;
+            }
+            catch(FormatException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Player TryParse method failed with exception {ex.Message}");
+            }
+
+            return success;
         }
 
         public void AddGamesPlayed()

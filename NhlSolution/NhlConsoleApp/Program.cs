@@ -5,10 +5,50 @@ namespace NhlConsoleApp
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void PrintTeamInfo(Team team)
+        {
+            //4: display the team info and all players in the team
+            Console.WriteLine($"{team.City} {team.Name} plays in {team.Arena}");
+            foreach(Player player in team.players)
+            {
+                Console.WriteLine(player);
+            }
+        }
+        static void readPlayerDataFromCsv()
+        {
+            //1: create a new csv file with 5 sample players
+
+            //2: crate a new Team instance
+            Team team = new Team("Oilers", "Edmonton", "Rogers Place", Conference.Western, Division.Pacific);
+            //3: write the code to read from the csv file using the Player TryParst method and write output to the screen
+            string path = @"..\..\..\player.csv";
+            string[] lineArray = File.ReadAllLines(path);
+            foreach(string line in lineArray)
+            {
+                try
+                {
+                    Player player = null;
+                    if (Player.TryParse(line, out player))
+                    {
+                        team.AddPlayer(player);
+                    }
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine($"Error reading file with exception {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error reading file with exception {ex.Message}");
+                }
+            }
+            PrintTeamInfo(team);
+        }
+
+        static void DemoLinq()
         {
             //create a new array with the names of 12 of your favorite game titles
-            string[] game = new string[12] {"Kirby", "Mario Kart", "Mario Odyseey", "Homescapes", "Line Bubble", "Bloon Defense", "Stardew Valley", "Don't Starve", "Wordscapes", "My Hotpot Story", "Mario Party", "Mario"};
+            string[] game = new string[12] { "Kirby", "Mario Kart", "Mario Odyseey", "Homescapes", "Line Bubble", "Bloon Defense", "Stardew Valley", "Don't Starve", "Wordscapes", "My Hotpot Story", "Mario Party", "Mario" };
 
             // print the name of each game title using a foreach loop
             foreach (string gameName in game)
@@ -17,7 +57,7 @@ namespace NhlConsoleApp
             }
             Console.WriteLine();
             //print the name of each game title using a for loop
-            for(int i=0; i<game.Length; i++)
+            for (int i = 0; i < game.Length; i++)
             {
                 Console.WriteLine(game[i]);
             }
@@ -48,6 +88,10 @@ namespace NhlConsoleApp
             string firstMarioGame = game.Where(game => game.Contains("Mario")).FirstOrDefault();
             Console.WriteLine(firstMarioGame);
 
+        }
+
+        static void Main(string[] args)
+        {
             //Console.Write("Enter the team name: ");
             //string teamName = Console.ReadLine();
 
@@ -66,6 +110,7 @@ namespace NhlConsoleApp
             //{
             //    Console.WriteLine(ex.Message);
             //}
+            readPlayerDataFromCsv();
         }
     }
 }
