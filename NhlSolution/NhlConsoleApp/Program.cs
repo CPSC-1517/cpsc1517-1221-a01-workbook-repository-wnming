@@ -1,20 +1,60 @@
 ﻿using NhlSystemClassLibrary;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace NhlConsoleApp
 {
     internal class Program
     {
+        static Team ReadTeamFromJsonFile(string jsonPath)
+        {
+            Team team = null;
+            try
+            {
+                string jsonString = File.ReadAllText(jsonPath);
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    IncludeFields = true,
+                };
+                team = JsonSerializer.Deserialize<Team>(jsonString, options);
+                //team.players = new JsonSerializer.Deserialize<List<Player>>(jsonString, options);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error serializing to Json file with exception: {ex.Message}");
+            }
+            return team;
+        }
+        static void WriteTeamInfoToJsonFile(Team team, string jsonPath)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    IncludeFields = true,
+                };
+                string jsonString = JsonSerializer.Serialize<Team>(team, options);
+                File.WriteAllText(jsonPath, jsonString);
+                Console.WriteLine("Write to Json file was successful.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error serializing to Json file with exception: {ex.Message}");
+            }
+        }
         static void PrintTeamInfo(Team team)
         {
             //4: display the team info and all players in the team
             Console.WriteLine($"{team.City} {team.Name} plays in {team.Arena}");
             foreach(Player player in team.players)
             {
-                Console.WriteLine(player);
+                Console.WriteLine(player.ToString());
             }
         }
-        static void readPlayerDataFromCsv()
+        static Team readPlayerDataFromCsv()
         {
             //1: create a new csv file with 5 sample players
 
@@ -42,7 +82,7 @@ namespace NhlConsoleApp
                     Console.WriteLine($"Error reading file with exception {ex.Message}");
                 }
             }
-            PrintTeamInfo(team);
+            return team;
         }
 
         static void DemoLinq()
@@ -110,7 +150,11 @@ namespace NhlConsoleApp
             //{
             //    Console.WriteLine(ex.Message);
             //}
-            readPlayerDataFromCsv();
+            string jsonPath = @"..\..\..\jsonPlayer.json";
+            //Team team = readPlayerDataFromCsv();
+            Team team = ReadTeamFromJsonFile(jsonPath);
+            PrintTeamInfo(team);
+            WriteTeamInfoToJsonFile(team, jsonPath);
         }
     }
 }

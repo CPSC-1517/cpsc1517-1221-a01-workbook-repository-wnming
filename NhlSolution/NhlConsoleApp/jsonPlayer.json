@@ -1,0 +1,49 @@
+{
+  "Name": "Oilers",
+  "City": "Edmonton",
+  "Arena": "Rogers Place",
+  "Conference": 1,
+  "Division": 3,
+  "players": [
+    {
+      "PlayerNo": 70,
+      "Name": "Ryan McLeod",
+      "Position": 0,
+      "GamePlayed": 5,
+      "Goals": 1,
+      "Assists": 5
+    },
+    {
+      "PlayerNo": 40,
+      "Name": "Jesse Puljujarvi",
+      "Position": 3,
+      "GamePlayed": 6,
+      "Goals": 4,
+      "Assists": 2
+    },
+    {
+      "PlayerNo": 55,
+      "Name": "Dylan Holloway",
+      "Position": 1,
+      "GamePlayed": 7,
+      "Goals": 3,
+      "Assists": 7
+    },
+    {
+      "PlayerNo": 13,
+      "Name": "Stuart Skinner",
+      "Position": 4,
+      "GamePlayed": 8,
+      "Goals": 5,
+      "Assists": 10
+    },
+    {
+      "PlayerNo": 91,
+      "Name": "Connor McDavid",
+      "Position": 2,
+      "GamePlayed": 9,
+      "Goals": 11,
+      "Assists": 22
+    }
+  ]
+}

@@ -173,6 +173,11 @@ namespace NhlSystemClassLibrary
             return new Player(playerNo, name, position, gamePlayed, goals, assists);
         }
 
+        public override string ToString()
+        {
+            return $"{PlayerNo},{Name},{Position},{GamePlayed},{Goals},{Assists}";
+        }
+
         public static bool TryParse(string csvLine, out Player currentPlayer)
         {
             bool success = false;
