@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -76,6 +77,8 @@ namespace NhlSystemClassLibrary
         public Team()
         {
         }
+
+        [JsonConstructor]
         public Team(string name, string city, string arena, Conference conference, Division division)
         {
             Name = name;
@@ -98,6 +101,7 @@ namespace NhlSystemClassLibrary
             Name = name;
         }
 
+        [JsonInclude]
         public List<Player> players { get; private set; }
 
         //TODO: Add method to add a new player
