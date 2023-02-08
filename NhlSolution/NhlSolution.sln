@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhlConsoleApp", "NhlConsole
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhlSystemTestProject", "NhlSystemTestProject\NhlSystemTestProject.csproj", "{D69C7274-B6F5-4F7E-B4E4-91BB771C5E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoTestProject", "DemoTestProject\DemoTestProject.csproj", "{3C809714-929A-4F19-BB5C-4F322192DA01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoTestProject", "DemoTestProject\DemoTestProject.csproj", "{3C809714-929A-4F19-BB5C-4F322192DA01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitialWebApp", "InitialWebApp\InitialWebApp.csproj", "{80CE66D3-4A1E-4850-8122-4C55621E28DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3C809714-929A-4F19-BB5C-4F322192DA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C809714-929A-4F19-BB5C-4F322192DA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C809714-929A-4F19-BB5C-4F322192DA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80CE66D3-4A1E-4850-8122-4C55621E28DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80CE66D3-4A1E-4850-8122-4C55621E28DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80CE66D3-4A1E-4850-8122-4C55621E28DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80CE66D3-4A1E-4850-8122-4C55621E28DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to CPSC1517 World</h1>
+    <p>The current datetime is @DateTime.Now</p>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
+    @if (Model.InfoMessage != null)
+    {
+        <div class="alert alert-info">
+            @Model.InfoMessage
+        </div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">Your Name: </label>
+            <input type="text" class="form-control" id="username" name="Username" value="@Model.Username" placeholder="Please input your name...">
+
+            <!--todo 1: add form fields for a number field and a date field-->
+            <!--todo 2: add form fields for a select field-->
+
+            <button type="submit" class="btn btn-primary">Say Hello</button>
+        </div>
+    </form>
+
+</div>
