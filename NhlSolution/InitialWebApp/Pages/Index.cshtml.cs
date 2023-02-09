@@ -15,6 +15,11 @@ namespace InitialWebApp.Pages
         //Define an auto-implemented property for username
         [BindProperty]
         public string Username { get; set; }
+        [BindProperty]
+        public int? Age { get; set; }
+        [BindProperty]
+        public string? Stream { get; set; } = "GP";
+
         //Define an auto-implemented property for feedback message
         public string? InfoMessage { get; private set; }
 
@@ -25,7 +30,9 @@ namespace InitialWebApp.Pages
             //"Hello {username}. Your lucky number is {luckyNumber}"
             var random = new Random();
             int num = random.Next(1, 51);
-            InfoMessage = $"Hello {Username}. Your lucky number is {num}";
+            InfoMessage = $"Hello {Username}. Your lucky number is {num}. <br />";
+            InfoMessage += ($"You are {Age} years old. <br />");
+            InfoMessage += ($"You are in {Stream} stream. <br />");
         }
 
         public void OnGet()

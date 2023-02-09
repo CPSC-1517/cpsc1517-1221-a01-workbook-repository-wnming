@@ -11,7 +11,7 @@ namespace NhlSystemClassLibrary
 {
     public class Team
     {
-        private string _name;
+        private string _name; //field
         private string _city;
         private string _arena;
         public string Name { 
@@ -79,7 +79,7 @@ namespace NhlSystemClassLibrary
         }
 
         [JsonConstructor]
-        public Team(string name, string city, string arena, Conference conference, Division division)
+        public Team(string name, string city, string arena, Conference conference, Division division) //constructor
         {
             Name = name;
             City = city;
@@ -89,7 +89,7 @@ namespace NhlSystemClassLibrary
             players = new List<Player>();
         }
 
-        public Team(string name, Conference conference, Division division)
+        public Team(string name, Conference conference, Division division) //overload, same name, different parameters
         {
             Name = name;
             Conference = conference;
@@ -102,7 +102,7 @@ namespace NhlSystemClassLibrary
         }
 
         [JsonInclude]
-        public List<Player> players { get; private set; }
+        public List<Player> players { get; private set; } // private set; - can be changed from only within the class
 
         //TODO: Add method to add a new player
         //1) Validate newPlayer is not null

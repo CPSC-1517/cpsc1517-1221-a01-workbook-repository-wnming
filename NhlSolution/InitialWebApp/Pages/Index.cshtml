@@ -8,24 +8,39 @@
     <h1 class="display-4">Welcome to CPSC1517 World</h1>
     <p>The current datetime is @DateTime.Now</p>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    
-    @if (Model.InfoMessage != null)
-    {
-        <div class="alert alert-info">
-            @Model.InfoMessage
-        </div>
-    }
-
-    <form method="post">
-        <div class="mb-3">
-            <label for="username" class="form-label">Your Name: </label>
-            <input type="text" class="form-control" id="username" name="Username" value="@Model.Username" placeholder="Please input your name...">
-
-            <!--todo 1: add form fields for a number field and a date field-->
-            <!--todo 2: add form fields for a select field-->
-
-            <button type="submit" class="btn btn-primary">Say Hello</button>
-        </div>
-    </form>
-
 </div>
+
+@if (Model.InfoMessage != null)
+{
+    <div class="alert alert-info">
+        @Model.InfoMessage
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="username" class="form-label">Your Name: </label>
+        <input type="text" class="form-control" id="username" name="Username" value="@Model.Username" placeholder="Please input your name...">
+    </div>
+    <!--todo 1: add form fields for a number field and a date field-->
+    <div class="mb-3">
+        <label for="age" class="form-label">Your Age: </label>
+        <input type="number" min="8" max="80" class="form-control" id="age" name="Age" value="@Model.Age" placeholder="Please input age name...">
+    </div>
+    <!--todo 2: add form fields for a select field-->
+    <div class="mb-3">
+        <select class="form-select" aria-label="Select your stream" name="Stream" id="stream" value="@Model.Stream">
+            <option selected>Choose your stream...</option>
+            <option value="GP">Game Programming</option>
+            <option value="WD">Web Development</option>
+            <option value="CSD">Computer Software Development</option>
+        </select>
+    </div>
+    <!--todo 3: add form fields for a radio field (Gender: male, female, other)-->
+    <!--todo 4: add form fields for a textarea field for a list of friends-->
+    <!--todo 5: add form fields for a checkbox field for subscibe to Spam-->
+    <!--todo 6: add form fields for a date field for Date of Birth-->
+    <!--todo 7: add form fields for a range field mood (0-100)-->
+    <!--todo 7: add form fields for an email field-->
+    <button type="submit" class="btn btn-light">Say Hello</button>
+</form>
