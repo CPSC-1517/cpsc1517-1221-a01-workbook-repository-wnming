@@ -1,0 +1,13 @@
+﻿@page
+@model RazorPagesDemo.Pages.RollDiceModel
+@{
+    ViewData["Title"] = "Roll Dice";
+}
+
+
+<h1 style="color:cornflowerblue">Six-Sided Dice Roll Simulator</h1>
+<img src="@Model.DiceFaceImage" alt="Dice Image" width="200px" height="200px"/>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Roll Dice</button>
+</form>
