@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RazorPagesDemo.Models;
 
 namespace RazorPagesDemo.Pages
 {
@@ -13,7 +14,6 @@ namespace RazorPagesDemo.Pages
         }
 
         public DateTime CurrentDateTime { get; private set; } = DateTime.Now;
-
         public int LuckyNumber { get; private set; } = 15;
 
         public void OnGet()
