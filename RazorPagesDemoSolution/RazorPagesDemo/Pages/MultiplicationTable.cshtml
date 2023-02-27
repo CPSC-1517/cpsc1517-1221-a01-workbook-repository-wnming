@@ -1,0 +1,67 @@
+﻿@page
+@model RazorPagesDemo.Pages.MultiplicationTableModel
+@{
+}
+
+<h1> Multiplication Table </h1>
+
+<form method="post">
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col">
+            <input asp-for="DigitsVertically" type="number" min="1" max="9" class="form-control" placeholder="digits vertically" aria-label="digits vertically"/>
+        </div>
+        <div class="col">
+            <input asp-for="DigitsHorizontally" type="number" min="1" max="9" class="form-control" placeholder="digits horizontally" aria-label="digits horizontally" />
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px">
+        <button type="submit" asp-page-handler="Multiply" class="btn btn-outline-secondary"> Generate Mutiplication</button>
+        <button type="submit" asp-page-handler="Add" class="btn btn-outline-success"> Generate Addition Mutiplication</button>
+        <button type="submit" asp-page-handler="Subtract" class="btn btn-outline-danger"> Generate Subtraction Mutiplication</button>
+    </div>
+</form>
+
+@if(Model.TableTypeToGenerate is not null)
+{
+    <table class="table table-bordered">
+        @for(int row = 1; row <= Model.DigitsVertically; row ++)
+        {
+            <tr>
+                @for(int col = 1; col <= Model.DigitsHorizontally; col++)
+                {
+                    int result = 0;
+                    if (Model.TableTypeToGenerate == Models.TableType.Multiplication)
+                    {
+                        result = row * col;
+                    }
+                    else 
+                    {
+                        if (Model.TableTypeToGenerate == Models.TableType.Addition)
+                        {
+                            result = row + col;
+                        }
+                        else
+                        {
+                            if (Model.TableTypeToGenerate == Models.TableType.Subtraction)
+                            {
+                                result = row - col;
+                            }
+                        }
+                    }
+                    if (row == col)
+                    {
+                        <td style="background-color:chartreuse">
+                            @result
+                        </td>
+                    }
+                    else 
+                    {
+                        <td>
+                            @result
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+}
