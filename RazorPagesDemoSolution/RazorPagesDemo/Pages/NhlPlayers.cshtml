@@ -1,0 +1,65 @@
+﻿@page
+@model RazorPagesDemo.Pages.NhlPlayersModel
+@{
+}
+
+<h1 style="background-color:tomato">NHL Team</h1>
+@if(Model.team != null)
+{
+    @*<table class="table table-sucess table-striped">
+        <thead>
+            <th>Player No</th>
+            <th>Player Name</th>
+            <th>Position</th>
+            <th>GP</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Points</th>
+        </thead>
+        <tbody>
+            @foreach (var currentPlayer in Model.players)
+            {
+                <tr>
+                    <td>@currentPlayer.PlayerNo</td>
+                    <td>@currentPlayer.Name</td>
+                    <td>@currentPlayer.Position</td>
+                    <td>@currentPlayer.GamePlayed</td>
+                    <td>@currentPlayer.Goals</td>
+                    <td>@currentPlayer.Assists</td>
+                    <td>@currentPlayer.Points</td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+    <div>Name: @Model.team.Name</div>
+    <div>City: @Model.team.City</div>
+    <div>Division: @Model.team.Division</div>
+    <div>Conference: @Model.team.Conference</div>
+    <div>Arena: @Model.team.Arena</div>
+    <h4 style="background-color:tomato">NHL Player List</h4>
+    <table class="table table-sucess table-striped">
+        <thead>
+        <th>Player No</th>
+        <th>Player Name</th>
+        <th>Position</th>
+        <th>GP</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Points</th>
+        </thead>
+        <tbody>
+            @foreach (var currentPlayer in Model.team.players)
+            {
+                <tr>
+                    <td>@currentPlayer.PlayerNo</td>
+                    <td>@currentPlayer.Name</td>
+                    <td>@currentPlayer.Position</td>
+                    <td>@currentPlayer.GamePlayed</td>
+                    <td>@currentPlayer.Goals</td>
+                    <td>@currentPlayer.Assists</td>
+                    <td>@currentPlayer.Points</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
