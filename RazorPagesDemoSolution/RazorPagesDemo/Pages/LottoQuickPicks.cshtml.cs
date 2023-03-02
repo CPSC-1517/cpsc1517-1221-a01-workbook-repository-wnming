@@ -45,7 +45,12 @@ namespace RazorPagesDemo.Pages
                         int[] currentLottoQuickPicks = new int[6];
                         for(int count = 1; count <= 6; count++)
                         {
-                            currentLottoQuickPicks[count - 1] = random.Next(1, 50);
+                            int randomNumber = random.Next(1, 50);
+                            while (currentLottoQuickPicks.ToList().Any(x => x == randomNumber))
+                            {
+                                randomNumber = random.Next(1, 50);
+                            }
+                            currentLottoQuickPicks[count - 1] = randomNumber;
                         }
                         //sort the contents of the array
                         Array.Sort(currentLottoQuickPicks);
