@@ -14,31 +14,40 @@
         @Html.Raw(Model.InfoMessage)
     </div>
 }
-@if (Model.ErrorMessage is not null)
+@*@if (Model.ErrorMessage is not null)
 {
     <div class="alert alert-danger">
         @Html.Raw(Model.ErrorMessage)
     </div>
-}
+}*@
 
 <form method="post">
+    <div asp-validation-summary="All" class="text-danger">
+        @if(ModelState.Count > 0)
+        {
+            <p>Please fix the following issue(s):</p>
+        }
+    </div>
     <div class="row mb-3">
         <label asp-for="Name" class="col-sm-2 col-form-label">Your Name:</label>
         <div class="col-sm-10">
             <input asp-for="Name" class="form-control" />
         </div>
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="row mb-3">
         <label asp-for="Email" class="col-sm-2 col-form-label">Your Email:</label>
         <div class="col-sm-10">
             <input asp-for="Email" class="form-control" />
         </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="row mb-3">
         <label asp-for="Comments" class="col-sm-2 col-form-label">Comments:</label>
         <div class="col-sm-10">
             <textarea asp-for="Comments" class="form-control"></textarea>
         </div>
+        <span asp-validation-for="Comments" class="text-danger"></span>
     </div>
     <div class="row mb-3">
         <div class="col-sm-10 offset-sm-2">

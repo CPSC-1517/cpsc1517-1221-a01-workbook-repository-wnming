@@ -26,64 +26,65 @@ namespace RazorPagesDemo.Pages
         public string? InfoMessage { get; private set; }
         public string? ErrorMessage { get; private set; }
 
-        public string defaltRequired = "is required and cannot be blank.";
-
         public void OnPostSendMessage()
         { 
             if(string.IsNullOrWhiteSpace(Name))
             {
-                ErrorMessage = $"Name {defaltRequired}";
+                ModelState.AddModelError(nameof(Name), "Name is required and cannot be blank.");
+                ///ErrorMessage = $"Name {defaltRequired}";
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(Email))
+                if(Name.Length < 5)
                 {
-                    ErrorMessage = $"Email {defaltRequired}";
+                    ModelState.AddModelError(nameof(Name), "Name must contain 5 or more.");
                 }
-                else
+            }
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                ModelState.AddModelError(nameof(Email), "Email is required and cannot be blank.");
+            }
+            if (string.IsNullOrWhiteSpace(Comments) || Comments.Length < 10)
+            {
+                ModelState.AddModelError(nameof(Comments), "Comments is required and cannot be blank.");
+            }
+            
+            if (ModelState.IsValid)
+            {
+                string subscribe = SubScribe ? "Yes" : "No";
+                InfoMessage = $"Name: {Name} <br />" +
+                             $"Email: {Email} <br />" +
+                             $"Comments: {Comments} <br />" +
+                             $"Subscribe to email: {subscribe} <br />";
+
+                SmtpClient sendMailClient = new SmtpClient();
+                sendMailClient.Host = Configuration["MailServerSettings:SmtpHost"];
+                sendMailClient.Port = int.Parse(Configuration["MailServerSettings:Port"]);
+                sendMailClient.EnableSsl = bool.Parse(Configuration["MailServerSettings:EnableSsl"]);
+
+                NetworkCredential mailCredentials = new NetworkCredential();
+                mailCredentials.UserName = Configuration["MailServerSettings:Username"];
+                mailCredentials.Password = Configuration["MailServerSettings:AppPassword"];
+                sendMailClient.Credentials = mailCredentials;
+
+                string mailToAddress = Email ?? "mingr_napat@hotmail.com";
+                string mailFromAddress = Configuration["MailServerSettings:Email"];
+
+                MailMessage mailMessage = new MailMessage(mailFromAddress, mailToAddress);
+                mailMessage.Subject = "[CPSC1517] New contact me form submission";
+                mailMessage.Body = InfoMessage;
+
+                try
                 {
-                    if(string.IsNullOrWhiteSpace(Comments) || Comments.Length < 10)
-                    {
-                        ErrorMessage = $"Comments {defaltRequired} And requied at least 10 characters.";
-                    }
-                    else
-                    {
-                        string subscribe = SubScribe ? "Yes" : "No";
-                        InfoMessage =$"Name: {Name} <br />" +
-                                     $"Email: {Email} <br />" +
-                                     $"Comments: {Comments} <br />" +
-                                     $"Subscribe to email: {subscribe} <br />";
-
-                        SmtpClient sendMailClient = new SmtpClient();
-                        sendMailClient.Host = Configuration["MailServerSettings:SmtpHost"];
-                        sendMailClient.Port = int.Parse(Configuration["MailServerSettings:Port"]);
-                        sendMailClient.EnableSsl = bool.Parse(Configuration["MailServerSettings:EnableSsl"]);
-
-                        NetworkCredential mailCredentials = new NetworkCredential();
-                        mailCredentials.UserName = Configuration["MailServerSettings:Username"];
-                        mailCredentials.Password = Configuration["MailServerSettings:AppPassword"];
-                        sendMailClient.Credentials = mailCredentials;
-
-                        string mailToAddress = Email ?? "mingr_napat@hotmail.com";
-                        string mailFromAddress = Configuration["MailServerSettings:Email"];
-
-                        MailMessage mailMessage = new MailMessage(mailFromAddress, mailToAddress);
-                        mailMessage.Subject = "[CPSC1517] New contact me form submission";
-                        mailMessage.Body = InfoMessage;
-
-                        try
-                        {
-                            sendMailClient.Send(mailMessage);
-                            Name = null;
-                            Email = null;
-                            Comments = null;
-                            InfoMessage = "Your message has been sent!";
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorMessage = $"Error sending mail with exception: {ex.Message}";
-                        }
-                    }
+                    sendMailClient.Send(mailMessage);
+                    Name = null;
+                    Email = null;
+                    Comments = null;
+                    InfoMessage = "Your message has been sent!";
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage = $"Error sending mail with exception: {ex.Message}";
                 }
             }
         }
